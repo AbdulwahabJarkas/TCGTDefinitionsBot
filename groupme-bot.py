@@ -7,6 +7,7 @@ import os
 import sys
 import requests
 import importlib
+import global_rules
 from flask import Flask, request
 
 #######################################################################################################
@@ -48,11 +49,11 @@ for bot in (os.getenv('BOT_INFO')).split('; '):
     BOT_INFO[info[0]] = (info[1], info[2])
 
 # When you create global rules for the bot, they will be imported here.
-try:
-    GLOBAL_RULES = __import__('global_rules') #TODO Change to importlib.import_module
-    print(errcol.ok + "Global rules found and added." + errcol.tail)
-except ImportError:
-    print(errcol.warn + "Global rules not found. Bot may load, but it won't do anything." + errcol.tail)
+# try:
+#     GLOBAL_RULES = __import__('global_rules') #TODO Change to importlib.import_module
+#     print(errcol.ok + "Global rules found and added." + errcol.tail)
+# except ImportError:
+#     print(errcol.warn + "Global rules not found. Bot may load, but it won't do anything." + errcol.tail)
 
 # When you create custom rules for a group, they will be imported here.
 for group in BOT_INFO:
@@ -117,10 +118,13 @@ def webhook():
     if data['name'] == BOT_INFO[data['group_id']][1]:
         return "ok", 200
 
+
     if data['group_id'] in GROUP_RULES:
         if GROUP_RULES[data['group_id']].run(data, BOT_INFO[data['group_id']], send_message):
             return "ok", 200
 
-    GLOBAL_RULES.run(data, BOT_INFO[data['group_id']], send_message)
+    # global_rules.run(data, BOT_INFO[data['group_id']], send_message)
+
+
 
     return "ok", 200
