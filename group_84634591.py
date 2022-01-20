@@ -12,5 +12,5 @@ def run(data, bot_info, send):
         send("Hi there! Your bot is working, you should start customizing it now.", bot_info[0])
         return True
 
-    send(data, bot_info[0])
+    send(str(data), bot_info[0])
     return True
