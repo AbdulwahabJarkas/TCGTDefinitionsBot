@@ -97,7 +97,8 @@ def logmsg(data):
             print(errcol.botmsg + "{}: {}{}".format(data['name'], attach_type(data['attachments']) ,data['text']) + errcol.tail)
 
 def send_message(msg, bot_id):
-    logmsg({"sender_type": "system", 'text': msg})
+
+    print(errcol.sysmsg + msg)
 
     data = {
             'bot_id' : bot_id,
@@ -124,6 +125,7 @@ def webhook():
 
     if data['group_id'] in GROUP_RULES:
         if GROUP_RULES[data['group_id']].run(data, BOT_INFO[data['group_id']], send_message):
+            print(errcol.sysmsg + "Successful Run")
             return "ok", 200
 
     # global_rules.run(data, BOT_INFO[data['group_id']], send_message)
