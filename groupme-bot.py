@@ -124,7 +124,10 @@ def webhook():
 
 
     if data['group_id'] in GROUP_RULES:
-        if GROUP_RULES[data['group_id']].run(data, BOT_INFO[data['group_id']], send_message):
+        if data['text'].startswith('dev'):
+            GROUP_RULES[data['group_id']].runws(data, BOT_INFO[data['group_id']], send_message)
+
+        elif GROUP_RULES[data['group_id']].run(data, BOT_INFO[data['group_id']], send_message):
             print(errcol.sysmsg + "Successful Run")
             return "ok", 200
 
