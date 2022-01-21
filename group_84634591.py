@@ -1,6 +1,7 @@
 import gspread
 import os, json
 
+
 def runws(data, bot_info, send):
     creds = json.loads(os.getenv('CLIENT_SECRET'))
     print(creds, os.getenv('CLIENT_SECRET'))
@@ -9,25 +10,12 @@ def runws(data, bot_info, send):
     worksheet = sh.get_worksheet(0)
     values_list = worksheet.row_values(1)
 
-    help_message = "Help:\n.help  -->  This screen\n.test  -->  Try it!\nOtherwise, repeats your message."
-
-    message = data['text']
-
-    if message == '.help':
-        send(help_message, bot_info[0])
-        return True
-
-    if message == '.test':
-        send("Hi there! Your bot is working, you should start customizing it now.", bot_info[0])
-        return True
-
     send(str(values_list), bot_info[0])
 
     return True
 
 
 def run(data, bot_info, send):
-
     help_message = "Help:\n.help  -->  This screen\n.test  -->  Try it!\nOtherwise, repeats your message."
 
     message = data['text']
