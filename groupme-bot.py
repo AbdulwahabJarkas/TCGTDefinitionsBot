@@ -97,10 +97,13 @@ def logmsg(data):
             print(errcol.botmsg + "{}: {}{}".format(data['name'], attach_type(data['attachments']) ,data['text']) + errcol.tail)
 
 def send_message(msg, bot_id):
+    logmsg({"sender_type": "system", 'text': msg})
+
     data = {
             'bot_id' : bot_id,
             'text' : msg,
             }
+
     requests.post(POST_TO, json=data)
 
 #######################################################################################################
