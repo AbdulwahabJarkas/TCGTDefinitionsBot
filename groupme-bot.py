@@ -119,18 +119,18 @@ def webhook():
     logmsg(data)
 
     # Prevent the bot from acting on its own messages
-    if data['name'] == BOT_INFO[data['group_id']][1] or "GroupMe":
+    if data['name'] == BOT_INFO[data['group_id']][1] or data['name'] == "GroupMe":
         return "ok", 200
 
 
     if data['group_id'] in GROUP_RULES:
-        print("HERE")
         if data['text'].startswith('dev'):
             GROUP_RULES[data['group_id']].runws(data, BOT_INFO[data['group_id']], send_message)
+        else:
+            GROUP_RULES[data['group_id']].run(data, BOT_INFO[data['group_id']], send_message)
 
-        elif GROUP_RULES[data['group_id']].run(data, BOT_INFO[data['group_id']], send_message):
-            print(errcol.sysmsg + "Successful Run")
-            return "ok", 200
+        print(errcol.sysmsg + "Successful Run")
+        return "ok", 200
 
     # global_rules.run(data, BOT_INFO[data['group_id']], send_message)
 
