@@ -115,7 +115,7 @@ def webhook():
     logmsg(data)
 
     # Prevent the bot from acting on its own messages
-    if data['name'] == BOT_INFO[data['group_id']][1]:
+    if data['name'] == BOT_INFO[data['group_id']][1] or "GroupMe":
         return "ok", 200
 
 
