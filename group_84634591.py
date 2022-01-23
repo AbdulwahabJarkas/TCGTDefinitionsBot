@@ -12,8 +12,8 @@ def run(data, bot_info, send):
         cmd = cmd.group(1).lower()
 
         if cmd == 'help':
-            send("To use this bot, you must send a message in the format: '!command (paramater' \n"
-                 "Currently, the only functional commands are !define (phrase) and !request (phrase). \n"
+            send("To use this bot, you must send a message in the format: \n\n'!command (paramater)' \n\n"
+                 "Currently, the only functional commands are !define (phrase) and !request (phrase). \n\n"
                  "For example, try !define bitcoin",
                  bot_info[0])
 
@@ -27,19 +27,19 @@ def run(data, bot_info, send):
                 return
 
             if loc:
-                definition = ws.cell(loc.row, 3)
+                definition = ws.cell(loc.row, 2)
 
                 if definition.value:
-                    send("@{}, the definition of {} is: \n\n  {}".format(data['name'], loc.value, definition.value)
+                    send("@{}, the definition of {} is: \n\n{}".format(data['name'], loc.value, definition.value)
                          , bot_info[0])
 
                 else:
-                    send("@{}, Term '{}' has been requested, but not yet defined".
+                    send("@{}, term '{}' has been requested but not yet defined".
                          format(data['name'], term), bot_info[0])
 
             elif cmd == 'request':
                 try:
-                    ws.append_row([term])
+                    ws.append_row([term, '', '', "({}{},)".format(data['user_id'], data['name'])])
                 except:
                     send("@{}, an error occured when attempted to insert term '{}' into our database. Please contact"
                          " a moderator".format(data['name'], term), bot_info[0])
