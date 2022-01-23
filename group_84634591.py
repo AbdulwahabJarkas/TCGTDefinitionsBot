@@ -26,6 +26,7 @@ def run(data, bot_info, send):
             term = data['text'].split(' ', 1)
             if len(term) == 1 or not term[1].strip():
                 send("Invalid command formatting, type !help for more instructions", bot_info[0])
+                return
             term = term[1]
 
             #Check Definitions, then aliases. This section is really bad.
