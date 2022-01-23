@@ -53,10 +53,10 @@ for bot in (os.getenv('BOT_INFO')).split('; '):
 for group in BOT_INFO:
     try:
         GROUP_RULES[group] = __import__('group_{}'.format(group))  # TODO Change to importlib.import_module
-        print(errcol.ok + "Group rules found and added for [G:{}]".format(group) + errcol.tail)
+        print(errcol.ok.value + "Group rules found and added for [G:{}]".format(group) + errcol.tail.value)
     except ImportError:
         if group in GROUP_RULES: del GROUP_RULES[group]
-        if DEBUG: print(errcol.debug + "Group rules not found for [G:{}]".format(group) + errcol.tail)
+        if DEBUG: print(errcol.debug.value + "Group rules not found for [G:{}]".format(group) + errcol.tail.value)
 
 
 #######################################################################################################
