@@ -20,7 +20,12 @@ def run(data, bot_info, send):
         elif cmd == 'define' or cmd == 'request':
             ws = bot_info[2].get_worksheet(0)
             term = data['text'].split(' ', 1)[1]
-            loc = ws.find(re.compile(r'\b{}\b'.format(term), re.I))
+
+            #Check Definitions, then aliases
+            loc = ws.find(re.compile(r'^\s*{}\s*$'.format(term), re.I))
+            if not loc:
+                loc = ws.find(re.compile(r'\b{}\b'.format(term), re.I))
+
 
             #TODO Add error handling for incorrect argument
             if not term.strip():
@@ -39,15 +44,15 @@ def run(data, bot_info, send):
 
             elif cmd == 'request':
                 try:
-                    ws.append_row([term, '', '', "({}{},)".format(data['user_id'], data['name'])])
+                    ws.append_row([term, '', '', "{}, {}".format(data['user_id'], data['name'])])
                 except:
-                    send("@{}, an error occured when attempted to insert term '{}' into our database. Please contact"
+                    send("@{}, an error occured when attempting to insert term '{}' into our database. Please contact"
                          " a moderator".format(data['name'], term), bot_info[0])
                 else:
                     send("@{}, Term '{}' successfully added to our database, pending definition! "
                          "Thank you for your contribution".format(data['name'], term), bot_info[0])
             else:
-                send("@{} Term '{}' has not been requested yet, "
+                send("@{} Term '{}' has not been requested or aliased yet. "
                      "You can use the command !request (phrase) to add it to our requests database!".
                      format(data['name'], term), bot_info[0])
 
