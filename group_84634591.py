@@ -16,7 +16,7 @@ def run(data, bot_info, send):
                  bot_info[0])
 
         if cmd == 'define':
-            ws = bot_info.get_worksheet(0)
+            ws = bot_info[2].get_worksheet(0)
             loc = ws.find(data['text'].split()[1].lower())
 
             if loc:
