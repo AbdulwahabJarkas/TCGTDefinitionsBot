@@ -46,7 +46,7 @@ def logmsg(data):
 
 def send_message(msg, bot_id):
 
-    print(errcol.sysmsg.value + 'Posting Message' + msg + 'from' + bot_id + errcol.tail.value)
+    print(errcol.sysmsg.value + ' Posting Message ' + msg + ' from: ' + bot_id + errcol.tail.value)
 
     data = {
             'bot_id' : bot_id,

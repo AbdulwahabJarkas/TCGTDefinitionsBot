@@ -15,15 +15,15 @@ def run(data, bot_info, send):
             send("Currently, the only functional command is !define (phrase). For example, try !define bitcoin",
                  bot_info[0])
 
-        if cmd == 'define':
+        elif cmd == 'define':
             ws = bot_info[2].get_worksheet(0)
-            loc = ws.find(data['text'].split()[1].lower())
+            loc = ws.find(data['text'].split(' ', 1)[1].lower().strip())
 
             if loc:
                 definition = ws.cell(loc.row, 3)
 
                 if definition.value:
-                    send("@{}, the definition of {} is: \n  {}".format(data['name'], loc.value, definition.value)
+                    send("@{}, the definition of {} is: \n\n  {}".format(data['name'], loc.value, definition.value)
                          , bot_info[0])
 
                 else:
