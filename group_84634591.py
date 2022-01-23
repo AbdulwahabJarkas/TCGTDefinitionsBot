@@ -17,7 +17,7 @@ def run(data, bot_info, send):
 
         elif cmd == 'define':
             ws = bot_info[2].get_worksheet(0)
-            loc = ws.find(data['text'].split(' ', 1)[1].lower().strip())
+            loc = ws.find(re.compile(data['text'].split(' ', 1)[1], re.I))
 
             if loc:
                 definition = ws.cell(loc.row, 3)
