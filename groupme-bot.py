@@ -37,7 +37,7 @@ if DEBUG:
 # Parses bot data from the environment into the format { group_id : [bot_id, bot_name, sheets] }
 for bot in (os.getenv('BOT_INFO')).split('; '):
     info = bot.split(', ')
-    BOT_INFO[info[0]] = (info[1], info[2], gcp.open_by_key(info[3]) if info[3] != '0' else None)
+    BOT_INFO[info[0]] = [info[1], info[2], gcp.open_by_key(info[3]) if info[3] != '0' else None]
     print(errcol.log.value + "Parsed Bot named {2} with ID {1} to Group with ID {0}, connected to Sheet ID {3}".format(
         *info)
           + errcol.tail.value)
