@@ -1,9 +1,10 @@
 # GroupMe Bot Driver
-[![contributions welcome](https://img.shields.io/badge/contributions-welcome-brightgreen.svg)](https://github.com/paulpfeister/GroupMe-BotDriver/issues) ![GitHub last commit](https://img.shields.io/github/last-commit/paulpfeister/groupme-botdriver.svg)
 
 This driver is written entirely in Python, and with easy configuration in mind.
 
 Using this driver, you'll be able to monitor multiple group chats with ease and set custom rules for each one (or the same for all, if that's what you want). For easy maintenance, each group's rules will be kept in their own files. I have also taken care to make debugging simple and logs easy to read, but more on that later.
+
+Special Thanks to Paul P Feister for the initial framework. 
 
 ## Deploying the bot
 
