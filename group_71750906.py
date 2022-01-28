@@ -10,7 +10,6 @@ def run(data, bot_info, send):
 
     if cmd:
         cmd = cmd.group(1).lower()
-        msg = ''
 
         if cmd == 'help':
             send(help,
@@ -70,9 +69,3 @@ def help():
     return "To use this bot, you must send a message in the format: \n\n'!command (paramater)' \n\n " \
            "Currently, the only functional commands are !define (phrase) and !request (phrase). \n\n " \
            "For example, try !define bitcoin"
-
-def define(data, ws):
-    return
-
-def request(data, ws):
-    return
