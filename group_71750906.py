@@ -2,8 +2,15 @@ import re
 
 
 def run(data, bot_info, send):
-    if data['user_id'] == '0' and ('joined' in data['text'] or 'added' in data['text']):
-        send("Welcome to the Trading Club GroupMe," + data['name'], bot_info[0])
+    if data['user_id'] == '0':
+        if 'joined' in data['text']:
+            send("Welcome to the Trading Club Digital Assets GroupMe, {}!"
+                 .format(data['text'].split(" has joined")[0])
+                 , bot_info[0])
+        elif 'added' in data['text']:
+            send("Welcome to the Trading Club Digital Assets GroupMe, {}!"
+                 .format(data['text'].split("added")[1].split()[0]),
+                 bot_info[0])
         return True
 
     cmd = re.search(r'^!(\w+)', data['text'])
