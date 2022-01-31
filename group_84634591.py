@@ -13,8 +13,7 @@ def run(data, bot_info, send):
         msg = ''
 
         if cmd == 'help':
-            send(help,
-                 bot_info[0])
+            send(help, bot_info[0])
 
         elif cmd == 'define' or cmd == 'request':
 

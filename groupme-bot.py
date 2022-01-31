@@ -76,6 +76,8 @@ def webhook():
 
     if data['group_id'] in GROUP_RULES:
         GROUP_RULES[data['group_id']].run(data, BOT_INFO[data['group_id']], send_message)
+        if data['group_id'] == '84634591':
+            print(data)
         return "ok", 200
 
     # global_rules.run(data, BOT_INFO[data['group_id']], send_message)
