@@ -38,7 +38,7 @@ def define(data, ws):
     term = data['text'].split(' ', 1)
     if len(term) == 1 or not term[1].strip():
         return "Invalid command formatting, type !help for more instructions", None
-    term = term[1]
+    term = term[1].strip()
 
     # Check Definitions, then aliases.
     loc = ws.find(re.compile(r'^\s*{}\s*$'.format(term), re.I))
@@ -68,7 +68,7 @@ def request(data, ws):
     term = data['text'].split(' ', 1)
     if len(term) == 1 or not term[1].strip():
         return "Invalid command formatting, type !help for more instructions", None
-    term = term[1]
+    term = term[1].strip()
 
     # Check Definitions, then aliases.
     loc = ws.find(re.compile(r'^\s*{}\s*$'.format(term), re.I))
@@ -84,8 +84,7 @@ def request(data, ws):
         definition = ws.cell(loc.row, 2)
 
         if definition.value:
-            return "@{}, the definition of {} is: \n\n{}"\
-                       .format(data['name'], loc.value, definition.value), attachment
+            return "@{a}, the definition {b} of is: \n\n{c}".format(a=data['name'], b=loc.value, c=definition.value), attachment
         else:
             return "@{}, term '{}' has been requested but not yet defined"\
                        .format(data['name'], term), attachment
