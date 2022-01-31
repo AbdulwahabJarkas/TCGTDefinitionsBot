@@ -44,7 +44,7 @@ def logmsg(data):
             print(errcol.botmsg.value + "{}: {}{}".format(data['name'], attach_type(data['attachments']) ,data['text'])
                   + errcol.tail.value)
 
-def send_message(msg, bot_id):
+def send_message(msg, bot_id, attachments = None):
 
     print(errcol.sysmsg.value + ' Posting Message ' + msg + ' from: ' + bot_id + errcol.tail.value)
 
@@ -52,5 +52,9 @@ def send_message(msg, bot_id):
             'bot_id' : bot_id,
             'text' : msg,
             }
+
+    if attachments:
+        data['attachments'] = attachments
+
 
     requests.post(POST_TO, json=data)
